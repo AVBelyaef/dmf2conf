@@ -29,6 +29,12 @@ tippy([...circles, ...buttons], {
     fetch(`/confluenceTitle/${id}`)
       .then((response) => response.json())
       .then(({ data }) => {
+        if (typeof data === 'object') {
+          console.error(data.message)
+          instance.setContent(data.message);
+
+          return;
+        }
         instance.setContent(data);
       })
       .catch((error) => {
